@@ -18,7 +18,7 @@ public class Request {
         this.nomeController = Character.toUpperCase(controleEMetodo[0].charAt(0))
 				+ controleEMetodo[0].substring(1) + "Controller";
 
-        this.nomeController = controleEMetodo[1];
+        this.nomeMetodo = controleEMetodo[1];
 
         this.queryParams = partesUrl.length > 1
 				? new QueryParamsBuilder().withParams(partesUrl[1]).build()
