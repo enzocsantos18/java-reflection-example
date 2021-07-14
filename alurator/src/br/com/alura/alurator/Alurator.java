@@ -1,6 +1,7 @@
 package br.com.alura.alurator;
 
 import br.com.alura.alurator.Reflexao.Reflexao;
+import br.com.alura.alurator.converter.XmlConverter;
 import br.com.alura.alurator.protocolo.Request;
 
 import java.util.Map;
@@ -29,6 +30,8 @@ public class Alurator {
 					throw new RuntimeException("Erro no método!");
 				})
 				.invoca();
+		
+		result = new XmlConverter().converte(result);
 
 
 		return result;
