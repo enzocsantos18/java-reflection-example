@@ -1,4 +1,4 @@
-package br.com.alura.estoque.annotations;
+package br.com.alura.alurator.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

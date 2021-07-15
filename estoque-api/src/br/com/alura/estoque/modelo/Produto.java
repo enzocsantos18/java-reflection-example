@@ -1,6 +1,6 @@
 package br.com.alura.estoque.modelo;
 
-import br.com.alura.estoque.annotations.ExportName;
+import br.com.alura.alurator.annotations.ExportName;
 
 @ExportName("produto")
 public class Produto {
@@ -8,7 +8,6 @@ public class Produto {
 	private String nome;
 	@ExportName("valor_produto")
 	private double valor;
-	@ExportName("marca_produto")
 	private String marca;
 	public Produto(String nome, double valor, String marca) {
 		this.nome = nome;

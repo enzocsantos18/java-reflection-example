@@ -3,6 +3,8 @@ package br.com.alura.alurator.converter;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
+import br.com.alura.alurator.annotations.ExportName;
+
 public class XmlConverter {
 
 	public String converte(Object object) {
@@ -21,12 +23,18 @@ public class XmlConverter {
 				xmlBuilder.append("</lista>");
 			} else {
 
-				String nomeClasse = classe.getSimpleName().toLowerCase();
+				ExportName anotacaoClasse = classe.getDeclaredAnnotation(ExportName.class);
+
+				String nomeClasse = anotacaoClasse == null ? classe.getName() : anotacaoClasse.value();
 				xmlBuilder.append("<" + nomeClasse + ">");
 
-				for (Field campo : classe.getDeclaredFields()) {
+				for (Field campo : classe.getDeclaredFields()) {	
 					campo.setAccessible(true);
-					String campoNome = campo.getName();
+					
+					ExportName anotacao = campo.getDeclaredAnnotation(ExportName.class);
+					
+					String campoNome = anotacao == null ? campo.getName() : anotacao.value();
+					
 					Object valor = campo.get(object);
 
 					xmlBuilder.append("<" + campoNome + ">");
