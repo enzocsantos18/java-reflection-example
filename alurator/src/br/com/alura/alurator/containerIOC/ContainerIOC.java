@@ -54,26 +54,9 @@ public class ContainerIOC {
 
 	}
 
-	public void registra(Class<?> tipoOrigem, Class<?> tipoDestino) {
-		
-		boolean compativel = verificaCompatibilidade(tipoOrigem, tipoDestino);
-		
-		if (!compativel) throw new ClassCastException("Não é possível resolver " + tipoOrigem.getName() + "para o tipo destino " + tipoDestino.getName());
-		
+	public <T, K extends T> void registra(Class<T> tipoOrigem, Class<K> tipoDestino) {
+				
 		mapaDeTipos.put(tipoOrigem, tipoDestino);
 	}
 
-	private boolean verificaCompatibilidade(Class<?> tipoOrigem, Class<?> tipoDestino) {
-//		boolean compativel;
-//		
-//		if(tipoOrigem.isInterface()) {
-//			compativel = Stream.of(tipoDestino.getInterfaces()).anyMatch(interfaceImplementada -> interfaceImplementada.equals(tipoOrigem));
-//		}
-//		else {
-//			compativel = tipoDestino.getSuperclass().equals(tipoOrigem) || tipoDestino.equals(tipoOrigem);
-//		}
-
-		
-		return tipoOrigem.isAssignableFrom(tipoDestino);
-	}
 }

@@ -44,7 +44,7 @@ public class Alurator {
 		return result;
 	}
 	
-	public void registra(Class<?> tipoOrigem, Class<?> tipoDestino) {
+	public <T, K extends T> void registra(Class<T> tipoOrigem, Class<K> tipoDestino) {
 		containerIOC.registra(tipoOrigem, tipoDestino);
 	}
 }

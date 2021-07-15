@@ -17,8 +17,9 @@ public class Main {
 			
 			Alurator alurator = new Alurator("br.com.alura.estoque.controle.");
 			alurator.registra(ProdutoDao.class, ProdutoDaoMock.class);
+			
 			while (!url.equals("exit")) {
-				Object response = alurator.executa(url);
+				Object response = alurator.executa(url);	
 				
 				System.out.println("Response: " + response);
 				
