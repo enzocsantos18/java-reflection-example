@@ -3,15 +3,16 @@ package br.com.alura.estoque.controle;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.alura.estoque.dao.ProdutoDao;
 import br.com.alura.estoque.dao.ProdutoDaoMock;
 import br.com.alura.estoque.modelo.Produto;
 
 public class ProdutoController {
 	
-	private ProdutoDaoMock produtoDao;
+	private ProdutoDao produtoDao;
 
-	public ProdutoController() {
-		produtoDao = new ProdutoDaoMock();
+	public ProdutoController(ProdutoDao produtoDao) {
+		this.produtoDao = produtoDao;
 	}
 	
 	public List<Produto> lista() {

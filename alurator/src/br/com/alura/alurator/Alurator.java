@@ -1,6 +1,8 @@
 package br.com.alura.alurator;
 
+import br.com.alura.alurator.Reflexao.ManipuladorObjeto;
 import br.com.alura.alurator.Reflexao.Reflexao;
+import br.com.alura.alurator.containerIOC.ContainerIOC;
 import br.com.alura.alurator.converter.XmlConverter;
 import br.com.alura.alurator.protocolo.Request;
 
@@ -9,9 +11,11 @@ import java.util.Map;
 public class Alurator {
 
 	private String pacoteBase;
+	private ContainerIOC containerIOC;
 
 	public Alurator(String pacoteBase) {
 		this.pacoteBase = pacoteBase;
+		this.containerIOC = new ContainerIOC();
 	}
 
 
@@ -21,8 +25,11 @@ public class Alurator {
 		String nomeMetodo = request.getNomeMetodo();
 		Map<String, Object> params = request.getQueryParams();
 
-		Object result = new Reflexao().refleteClasse(pacoteBase + nomeController)
-				.criaInstancia()
+		Class<?> classeControle = new Reflexao().getClasse(pacoteBase + nomeController);
+		
+		Object instanciaControle = containerIOC.getInstancia(classeControle);
+		
+		Object result = new ManipuladorObjeto(instanciaControle)
 				.getMetodo(nomeMetodo, params)
 				.comTratamentoDeExcecao((metodo, ex) -> {
 					System.out.println("Erro no método " + metodo.getName() + " da classe "
@@ -35,5 +42,9 @@ public class Alurator {
 
 
 		return result;
+	}
+	
+	public void registra(Class<?> tipoOrigem, Class<?> tipoDestino) {
+		containerIOC.registra(tipoOrigem, tipoDestino);
 	}
 }
